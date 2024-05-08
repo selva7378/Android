@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">DummyConstraint</string>
+    <string name="selva_mass">SELVA MASS</string>
+    <string name="scroll_my_images">scroll my images</string>
+    <string name="comment">comment</string>
+    <string name="share">share</string>
+    <string name="like">like</string>
+    <string name="forward">forward</string>
+    <string name="pause">pause</string>
+    <string name="play">play</string>
+    <string name="pause_play">pause_play</string>
+    <string name="backward">backward</string>
+    <string name="cross_button">cross_button</string>
+    <string name="search_button">search_button</string>
+    <string name="anual_day_photo">ANUAL DAY PHOTO</string>
+    <string name="annual_day_photo">ANNUAL DAY PHOTO</string>
+</resources>

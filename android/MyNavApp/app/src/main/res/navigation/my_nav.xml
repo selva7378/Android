@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/start_screen">
+
+    <fragment
+        android:id="@+id/start_screen"
+        android:name="com.example.mynavapp.screens.start.start_screen"
+        android:label="fragment_start_screen"
+        tools:layout="@layout/fragment_start_screen" >
+        <action
+            android:id="@+id/action_start_screen_to_game_screen"
+            app:destination="@id/game_screen" />
+    </fragment>
+    <fragment
+        android:id="@+id/game_screen"
+        android:name="com.example.mynavapp.screens.game.game_screen"
+        android:label="fragment_game_screen"
+        tools:layout="@layout/fragment_game_screen" >
+        <action
+            android:id="@+id/action_game_screen_to_result"
+            app:destination="@id/result" />
+        <action
+            android:id="@+id/gamescreen_exit"
+            app:destination="@id/result"
+            app:exitAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/result"
+        android:name="com.example.mynavapp.screens.result.result"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_result_to_start_screen"
+            app:destination="@id/start_screen" />
+        <argument
+            android:name="flamesResult"
+            app:argType="string" />
+    </fragment>
+</navigation>

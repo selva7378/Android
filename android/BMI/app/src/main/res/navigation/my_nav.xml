@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragmentCheckYourHealth">
+
+    <fragment
+        android:id="@+id/main2"
+        android:name="com.example.bmi.screens.main.main"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main2_to_result"
+            app:destination="@id/result" />
+    </fragment>
+    <fragment
+        android:id="@+id/result"
+        android:name="com.example.bmi.screens.result.result"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_result_to_main2"
+            app:destination="@id/main2" />
+        <argument
+            android:name="bmiResult"
+            app:argType="float" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCheckYourHealth"
+        android:name="com.example.bmi.screens.home.fragmentCheckYourHealth"
+        android:label="fragment_check_your_health"
+        tools:layout="@layout/fragment_check_your_health" >
+        <action
+            android:id="@+id/action_fragmentCheckYourHealth_to_main2"
+            app:destination="@id/main2" />
+    </fragment>
+</navigation>

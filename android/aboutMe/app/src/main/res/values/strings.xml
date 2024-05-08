@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="start">START</string>
+    <string name="name">SELVA GANESH M</string>
+    <string name="yellow_star">Yellow star</string>
+    <string name="bio">
+        Hi my name is SELVA GANESH M.
+        \nI am from SEDAPATTI, MADURAI-625527.
+        \n\nEDUCATION:
+        \n\nJEPPIAAR ENGINEERING COLLEGE B.TECH (82%)
+        \nMAHATMA MONTESSORI MATRIC HIGHER SECONDARY SCHOOL XII SCIENCE (81.33%)
+        \nMAHATMA MONTESSORI MATRIC HIGHER SECONDARY SCHOOL X(95.8%)
+        \nSKILLS:
+        \n\n\t\tc
+        \n\t\tc++
+        \n\t\tmysql
+        \n\t\tjava
+        \n\nBOOK SHOP MANAGEMENT USING C++, MYSQL AND MYSQL CONNECTOR 8.
+
+        \n\nMODULES :
+            \n\n\tBOOKS
+            \n\tSUPPLIERS
+            \n\tPURCHASES
+            \n\tEMPLOYEES
+            \n\tMEMBERS
+            \n\tSALES
+        \n\nCONNECTED MYSQL TO C++ APPLICATION USING MYSQL CONNECTOR 8(XDEVAPI).
+        \n\nDone a music keyboard ios app using SWIFT , Storyboard.
+        \n\nCONSOLE APPLICATION USING JAVA (LIBRARY MANAGEMENT &amp; INTERVIEW PANNEL).</string>
+    <string name="What_is_your_nickname">What is your Nickname ?</string>
+    <string name="done">DONE</string>
+</resources>

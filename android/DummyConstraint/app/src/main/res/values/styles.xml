@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="headline_in_scroll_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#673AB7</item>
+        <item name="android:textColor">#FFFEFE</item>
+    </style>
+</resources>

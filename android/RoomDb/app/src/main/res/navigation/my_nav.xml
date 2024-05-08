@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/dataAdd">
+
+    <fragment
+        android:id="@+id/dataAdd"
+        android:name="com.example.roomdb.screens.dataadd.DataAdd"
+        android:label="fragment_data_add"
+        tools:layout="@layout/fragment_data_add" >
+        <action
+            android:id="@+id/action_dataAdd_to_dataDelete"
+            app:destination="@id/dataDelete" />
+    </fragment>
+    <fragment
+        android:id="@+id/dataDelete"
+        android:name="com.example.roomdb.screens.datadelete.DataDelete"
+        android:label="fragment_data_delete"
+        tools:layout="@layout/fragment_data_delete" >
+        <action
+            android:id="@+id/action_dataDelete_to_dataAdd"
+            app:destination="@id/dataAdd" />
+    </fragment>
+</navigation>
