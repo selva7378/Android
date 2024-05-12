@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/listingscreen3">
+    <fragment
+        android:id="@+id/listingscreen3"
+        android:name="com.example.newsweather.screens.Listingscreen"
+        android:label="fragment_listingscreen"
+        tools:layout="@layout/fragment_listingscreen" >
+        <action
+            android:id="@+id/action_listingscreen3_to_webView"
+            app:destination="@id/webView" />
+    </fragment>
+    <fragment
+        android:id="@+id/webView"
+        android:name="com.example.newsweather.webView"
+        android:label="fragment_web_view"
+        tools:layout="@layout/fragment_web_view" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+</navigation>

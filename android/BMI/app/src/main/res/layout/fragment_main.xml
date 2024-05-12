@@ -57,17 +57,40 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <EditText
-                            android:id="@+id/editText_weight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:hint="ENTER WEIGHT IN KG"
-                            android:inputType="text"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textField1"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="202dp"
+                            android:layout_height="63dp"
+                            android:background="@null"
+                            android:hint="ENTER WEIGHT"
+                            app:helperText="ENTER WEIGHT IN KG"
+                            app:helperTextEnabled="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView_weight"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.52"
+                            app:suffixText="KG">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editText_weight"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:ems="10"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+<!--                        <EditText-->
+<!--                            android:id="@+id/editText_weight"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:ems="10"-->
+<!--                            android:hint="ENTER WEIGHT IN KG"-->
+<!--                            android:inputType="number"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@+id/imageView_weight"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
                         <ImageView
                             android:id="@+id/imageView_weight"
@@ -101,17 +124,40 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <EditText
-                            android:id="@+id/editText_height"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:hint="ENTER HEIGHT IN CM"
-                            android:inputType="text"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textField"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="202dp"
+                            android:layout_height="63dp"
+                            android:background="@null"
+                            android:hint="ENTER HEIGHT"
+                            app:helperText="ENTER HEIGHT IN CM"
+                            app:helperTextEnabled="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView6"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.52"
+                            app:suffixText="CM">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editTextHeight"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:ems="10"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+<!--                        <EditText-->
+<!--                            android:id="@+id/editText_height"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:ems="10"-->
+<!--                            android:hint="ENTER HEIGHT IN CM"-->
+<!--                            android:inputType="number"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@+id/imageView6"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -132,6 +178,7 @@
                 style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/Base.Theme.BMI"
                 android:text="CALCULATE"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

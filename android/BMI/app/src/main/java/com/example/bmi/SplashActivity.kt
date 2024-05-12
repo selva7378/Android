@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.bmi.databinding.ActivitySplashBinding
-import com.example.bmi.databinding.FragmentResultBinding
 
 
 class SplashActivity : AppCompatActivity() {
@@ -15,6 +14,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setTheme(R.style.LightWithoutAppBar)
         setContentView(R.layout.activity_splash)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)

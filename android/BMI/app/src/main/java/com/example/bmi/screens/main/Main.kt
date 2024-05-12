@@ -47,6 +47,7 @@ class main : Fragment() {
         // binding.animationView.playAnimation()
         binding.buttonCalculate.setOnClickListener{
             calculateBMI()
+
         }
         return binding.root
     }
@@ -54,6 +55,8 @@ class main : Fragment() {
     private fun calculateBMI() {
         val weightStr = binding.editTextWeight.text.toString()
         val heightStr = binding.editTextHeight.text.toString()
+        binding.editTextWeight.text?.clear()
+        binding.editTextHeight.text?.clear()
 
         val weight = weightStr.toFloatOrNull()
         val height = heightStr.toFloatOrNull()

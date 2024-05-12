@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/background_splash</item>
+<!--    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">-->
+<!--        <item name="android:background">@drawable/background_splash</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Primary brand color for the app bar -->
+        <item name="colorPrimary">#c8b6ff</item>
+        <!-- Customize other theme attributes as needed -->
+    </style>
+
+    <style name="LightWithoutAppBar" parent="Theme.AppCompat.Light.NoActionBar">
+
     </style>
 
 </resources>
