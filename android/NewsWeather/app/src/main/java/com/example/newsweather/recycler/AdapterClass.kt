@@ -37,7 +37,10 @@ class AdapterClass(private val dataList: List<String>,
         // Set click listener
         holder.itemView.setOnClickListener {
             Log.i("categor adapter", "on click is pressed")
-            newsViewModel.dbRetrieveCategory(currentItem)
+            newsViewModel.category = currentItem
+            newsViewModel.currentPage = 0
+            newsViewModel.searchFlag = false
+            newsViewModel.dbRetrieveCategory(currentItem, "category")
         }
     }
 

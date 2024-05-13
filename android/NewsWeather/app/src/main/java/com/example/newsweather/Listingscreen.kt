@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -66,7 +67,7 @@ class Listingscreen : Fragment() {
         categoryRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         categoryRecyclerView.setHasFixedSize(true)
 
-        val immutableList = listOf("national", "business",
+        val immutableList = listOf("all", "national", "business",
             "sports", "world",
             "politics", "technology", "startup", "entertainment",
             "miscellaneous", "hatke", "science", "automobile")
@@ -84,8 +85,8 @@ class Listingscreen : Fragment() {
             Log.i("listing screen live data size", newsViewModel.allDataListFromRoom.value?.size.toString())
         }
         newsViewModel._categoryDataListFromRoom.observe(viewLifecycleOwner){dataList ->
+            newsListingAdapter.clearData()
             newsListingAdapter.addData(dataList)
-
         }
 
         listingRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -97,8 +98,34 @@ class Listingscreen : Fragment() {
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    newsViewModel.dbRetrieve()
+                    if(newsViewModel.category == "all"){
+                        Log.i("Listingscreen", "all scrolling")
+                        newsViewModel.dbRetrieve()
+                    }else if(newsViewModel.searchFlag == true){
+                        Log.i("Listingscreen", "search scrolling")
+                        newsViewModel.dbRetrieveBySearch(newsViewModel.category, "scrollview")
+                    }else{
+                        Log.i("Listingscreen", "category scrolling")
+                        newsViewModel.dbRetrieveCategory(newsViewModel.category, "allData")
+                    }
+
                 }
+            }
+        })
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Perform search when user submits query (e.g., press search button)
+                newsViewModel.dbRetrieveBySearch(query, "searchview")
+                newsViewModel.category = query!!
+                newsViewModel.searchFlag = true
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Perform search as user types (optional)
+//                performSearch(newText)
+                return true
             }
         })
 //        recyclerView.adapter = AdapterClass(newsViewModel.dataListFromRoom)

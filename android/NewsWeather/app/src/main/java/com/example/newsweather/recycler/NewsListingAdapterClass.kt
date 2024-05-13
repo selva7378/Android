@@ -24,6 +24,11 @@ class NewsListingAdapterClass(private val navController: NavController):
         notifyDataSetChanged() // Notify adapter that data set has changed
     }
 
+    fun clearData() {
+        dataList?.clear()
+        notifyDataSetChanged() // Notify adapter that data set has changed
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)

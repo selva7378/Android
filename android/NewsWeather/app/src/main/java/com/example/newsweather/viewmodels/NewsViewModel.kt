@@ -20,18 +20,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Query
 
 class NewsViewModel(val database: NewsDatabaseDao,
                     application: Application) : AndroidViewModel(application) {
     private val _allDataListFromRoom = MutableLiveData<List<News?>>().apply { value = emptyList() }
+    var category: String = "all"
     val allDataListFromRoom: LiveData<List<News?>>
         get() = _allDataListFromRoom
     val _categoryDataListFromRoom = MutableLiveData<List<News?>>()
-    private var currentPage = 0
+    var currentPage = 0
     private val pageSize = 4 // Number of items per page
-//    val dataListFromRoom: LiveData<List<News?>>
-//        get() = _dataListFromRoom
-//    var dataListFromRoom: List<News?> = listOf()
+    var searchFlag: Boolean = false;
+
 
 
     private var viewModelJob = Job()
@@ -105,6 +106,7 @@ class NewsViewModel(val database: NewsDatabaseDao,
         return withContext(Dispatchers.IO){
 //            delay(1000)
 
+
             _allDataListFromRoom.postValue(database.getAll(pageSize, currentPage * pageSize))
 //            _allDataListFromRoom.postValue(database.getAll())
             currentPage++
@@ -112,23 +114,44 @@ class NewsViewModel(val database: NewsDatabaseDao,
         }
     }
 
-    fun dbRetrieveCategory(category: String){
+    fun dbRetrieveCategory(category: String, whereToAdd: String){
         uiScope.launch {
-            getByCategory(category)
+            getByCategory(category, whereToAdd)
         }
     }
 
-    private suspend fun getByCategory(category: String){
+    private suspend fun getByCategory(category: String, whereToAdd: String){
         return withContext(Dispatchers.IO){
-//            val newData = database.getAllByCategory(category)
-//            val currentList = _categoryDataListFromRoom.value ?: emptyList() // Get the current list, or an empty list if null
-//
-//            _categoryDataListFromRoom.postValue(currentList + newData)
-            _categoryDataListFromRoom.postValue(database.getAllByCategory(category))
+            if(whereToAdd == "allData"){
+                _allDataListFromRoom.postValue(database.getAllByCategory(category,pageSize, currentPage * pageSize ))
+            }else{
+                if(category == "all"){
+                    _categoryDataListFromRoom.postValue(database.getAll())
+                }else{
+                    _categoryDataListFromRoom.postValue(database.getAllByCategory(category,pageSize, currentPage * pageSize ))
+                }
+            }
+            currentPage++
             Log.i("newviewmodel", "getbycategory is running")
         }
     }
 
+    fun dbRetrieveBySearch(query: String?, flag: String){
+        uiScope.launch {
+            search(query, flag)
+        }
+    }
+
+
+    private suspend fun search(query: String?, flag: String){
+        return withContext(Dispatchers.IO){
+            if(flag == "scrollview"){
+                _allDataListFromRoom.postValue(database.search(query, pageSize, currentPage * pageSize))
+            }else{
+                _categoryDataListFromRoom.postValue(database.search(query, pageSize, currentPage * pageSize))
+            }
+        }
+    }
 
 
     override fun onCleared() {

@@ -15,10 +15,13 @@ interface NewsDatabaseDao{
     @Query("DELETE FROM News")
     fun clear()
 
-    @Query("SELECT * FROM News WHERE category = :category")
-    fun getAllByCategory(category: String): List<News?>
+    @Query("SELECT * FROM News WHERE category = :category LIMIT :pageSize OFFSET :offset")
+    fun getAllByCategory(category: String, pageSize: Int, offset: Int): List<News?>
 
     @Query("SELECT * FROM News LIMIT :pageSize OFFSET :offset")
     fun getAll(pageSize: Int, offset: Int): List<News?>
+
+    @Query("SELECT * FROM News WHERE title LIKE '%' || :query || '%' LIMIT :pageSize OFFSET :offset")
+    fun search(query: String?, pageSize: Int, offset: Int): List<News>
 
 }
