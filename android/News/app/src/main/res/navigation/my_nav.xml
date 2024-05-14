@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/listingscreen3">
+    app:startDestination="@id/newsListingScreen">
+
     <fragment
-        android:id="@+id/listingscreen3"
-        android:name="com.example.newsweather.screens.Listingscreen"
-        android:label="fragment_listingscreen"
-        tools:layout="@layout/fragment_listingscreen" >
+        android:id="@+id/newsListingScreen"
+        android:name="com.example.news.newsListingScreen"
+        android:label="fragment_news_listing_screen"
+        tools:layout="@layout/fragment_news_listing_screen" >
         <action
-            android:id="@+id/action_listingscreen3_to_webView"
-            app:destination="@id/webView" />
+            android:id="@+id/action_newsListingScreen_to_webViewScreen"
+            app:destination="@id/webViewScreen" />
     </fragment>
     <fragment
-        android:id="@+id/webView"
-        android:name="com.example.newsweather.webView"
-        android:label="fragment_web_view"
-        tools:layout="@layout/fragment_web_view" >
+        android:id="@+id/webViewScreen"
+        android:name="com.example.news.webViewScreen"
+        android:label="fragment_web_view_screen"
+        tools:layout="@layout/fragment_web_view_screen" >
         <argument
             android:name="url"
             app:argType="string" />
