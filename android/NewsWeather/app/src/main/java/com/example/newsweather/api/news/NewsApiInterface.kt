@@ -1,9 +1,7 @@
-package com.example.newsweather.api
+package com.example.newsweather.api.news
 
-import com.example.newsweather.database.roomdb.News
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface ApiInterface {

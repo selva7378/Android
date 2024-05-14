@@ -5,14 +5,15 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.newsweather.api.ApiInterface
-import com.example.newsweather.api.NewsApi
+import com.example.newsweather.api.news.NewsApiInterface
+import com.example.newsweather.api.news.NewsApi
+import com.example.newsweather.api.weather.Weather
+import com.example.newsweather.api.weather.WeatherApiInterface
 import com.example.newsweather.database.roomdb.News
 import com.example.newsweather.database.roomdb.NewsDatabaseDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -20,15 +21,17 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 
 class NewsViewModel(val database: NewsDatabaseDao,
                     application: Application) : AndroidViewModel(application) {
     private val _allDataListFromRoom = MutableLiveData<List<News?>>().apply { value = emptyList() }
-    var category: String = "all"
     val allDataListFromRoom: LiveData<List<News?>>
         get() = _allDataListFromRoom
+    private val _temperature = MutableLiveData<Double?>()
+    val temperature: LiveData<Double?>
+        get() = _temperature
     val _categoryDataListFromRoom = MutableLiveData<List<News?>>()
+    var category: String = "all"
     var currentPage = 0
     private val pageSize = 4 // Number of items per page
     var searchFlag: Boolean = false;
@@ -39,12 +42,12 @@ class NewsViewModel(val database: NewsDatabaseDao,
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
-    fun getMyData(){
+    fun newsGetMyData(){
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://inshortsapi.vercel.app/")
             .build()
-            .create(ApiInterface::class.java)
+            .create(NewsApiInterface::class.java)
 
         val apiCatagoryList: ArrayList<String> = arrayListOf("news?category=national", "news?category=business",
             "news?category=sports", "news?category=world",
@@ -77,6 +80,32 @@ class NewsViewModel(val database: NewsDatabaseDao,
             })
         }
     }
+
+    fun weatherGetMyData(){
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.tomorrow.io/v4/weather/")
+            .build()
+            .create(WeatherApiInterface::class.java)
+
+
+        val retrofitData = retrofitBuilder.getData("realtime?location=madurai&apikey=83ASz9eG4Mblxzt2MkhmocPAvHe3wzD3")
+
+
+        retrofitData.enqueue(object : Callback<Weather?> {
+            override fun onResponse(
+                p0: Call<Weather?>,
+                p1: Response<Weather?>
+            ) {
+                val responseBody = p1?.body()!!
+                _temperature.value = responseBody.data.values.temperature!!
+            }
+            override fun onFailure(p0: Call<Weather?>, p1: Throwable) {
+                Log.d("MainActivity","on Failure"+ p1.message)
+            }
+        })
+    }
+
 
     fun dbInsert(category: String, author: String, content: String,
                  date: String,id: String, imageUrl: String,
