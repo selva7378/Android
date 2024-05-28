@@ -1,4 +1,4 @@
-package com.example.newsweather.recycler
+package com.example.news.recycler
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsweather.R
-import com.example.newsweather.database.roomdb.News
-import com.example.newsweather.screens.ListingscreenDirections
+import com.example.news.R
+import com.example.news.roomdb.news.News
+import com.example.news.screens.newslisting.newsListingScreenDirections
+
 import com.squareup.picasso.Picasso
 
 class NewsListingAdapterClass(private val navController: NavController):
@@ -53,7 +54,7 @@ class NewsListingAdapterClass(private val navController: NavController):
 
         // Set click listener
         holder.itemView.setOnClickListener {
-            navController.navigate(ListingscreenDirections.actionListingscreen3ToWebView(currentItem?.readMoreUrl!!))
+            navController.navigate(newsListingScreenDirections.actionNewsListingScreenToWebViewScreen(currentItem?.readMoreUrl!!))
         }
     }
 

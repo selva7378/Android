@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/newsListingScreen"
-        android:name="com.example.news.newsListingScreen"
+        android:name="com.example.news.screens.newslisting.newsListingScreen"
         android:label="fragment_news_listing_screen"
         tools:layout="@layout/fragment_news_listing_screen" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/webViewScreen"
-        android:name="com.example.news.webViewScreen"
+        android:name="com.example.news.screens.webview.webViewScreen"
         android:label="fragment_web_view_screen"
         tools:layout="@layout/fragment_web_view_screen" >
         <argument

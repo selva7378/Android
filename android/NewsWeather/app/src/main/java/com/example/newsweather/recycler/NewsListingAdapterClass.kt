@@ -54,6 +54,7 @@ class NewsListingAdapterClass(private val navController: NavController):
         // Set click listener
         holder.itemView.setOnClickListener {
             navController.navigate(ListingscreenDirections.actionListingscreen3ToWebView(currentItem?.readMoreUrl!!))
+//            navController.navigate(Li.actionListingscreen3ToWebView(currentItem?.readMoreUrl!!))
         }
     }
 

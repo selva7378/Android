@@ -130,7 +130,6 @@ class Listingscreen : Fragment() {
         })
 //        recyclerView.adapter = AdapterClass(newsViewModel.dataListFromRoom)
 
-
         return binding.root
     }
 

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Basics Codelab</string>
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
+    <string name="description">"It Is Not Wise To Judge Others Based On Your Own Perceptions And By Their Appearances."</string>
+</resources>

@@ -1,20 +1,18 @@
-package com.example.newsweather.recycler
+package com.example.news.recycler
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.newsweather.R
-import com.example.newsweather.screens.ListingscreenDirections
-import com.example.newsweather.viewmodels.NewsViewModel
+import com.example.news.R
+import com.example.news.viewmodels.newsviewmodel.NewsViewModel
 
 
 class AdapterClass(private val dataList: List<String>,
-                   private val newsViewModel: NewsViewModel)
+                   private val newsViewModel: NewsViewModel
+)
     : RecyclerView.Adapter<AdapterClass.ViewHolderClass>() {
 
 
