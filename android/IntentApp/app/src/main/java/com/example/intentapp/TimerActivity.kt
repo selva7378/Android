@@ -51,7 +51,6 @@ fun Timer(modifier: Modifier = Modifier) {
         Row {
             ElevatedButton(onClick = {
                 Intent(context.applicationContext, TimerService::class.java).also{
-                    it.action = TimerService.Actions.START.toString()
                     context.startService(it)
                 }
             }) {
@@ -59,8 +58,7 @@ fun Timer(modifier: Modifier = Modifier) {
             }
             ElevatedButton(onClick = {
                 Intent(context.applicationContext, TimerService::class.java).also{
-                    it.action = TimerService.Actions.STOP.toString()
-                    context.startService(it)
+                    context.stopService(it)
                 }
             }) {
                 Text(text = "STOP")

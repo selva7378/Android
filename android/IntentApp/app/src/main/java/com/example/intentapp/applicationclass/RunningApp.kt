@@ -11,8 +11,8 @@ class RunningApp : Application() {
         super.onCreate()
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val channel = NotificationChannel(
-                "running channel",
-                "Running Notifications",
+                "YOUR_CHANNEL_ID",
+                "Stopwatch Service Channel",
                 NotificationManager.IMPORTANCE_HIGH
             )
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
