@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Business Card</string>
+    <string name="full_name">SELVA GANESH M</string>
+    <string name="role">ANDROID DEVELOPER</string>
+    <string name="gmail">selvaganesh7378@gmail.com</string>
+    <string name="address">Tamil Nadu, India</string>
+    <string name="ph_no">+91 9344574782</string>
+</resources>
