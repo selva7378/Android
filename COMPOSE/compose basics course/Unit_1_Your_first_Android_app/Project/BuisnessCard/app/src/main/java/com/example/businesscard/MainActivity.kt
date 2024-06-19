@@ -172,7 +172,8 @@ fun ContactInfoSection(phNumber: String, gmail: String, address: String, modifie
             Icon(
                 imageVector = Icons.Rounded.Place,
                 tint = Color(0xFF3ddc84),
-                contentDescription = "Address")
+                contentDescription = "Address"
+            )
             Text(
                 text = address,
                 modifier = Modifier.padding(
