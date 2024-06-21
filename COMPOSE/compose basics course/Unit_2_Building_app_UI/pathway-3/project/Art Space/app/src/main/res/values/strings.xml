@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Art Space</string>
+    <string name="title_one">Black And Color</string>
+    <string name="title_two">Mass</string>
+    <string name="title_three">Black And White</string>
+    <string name="author_one">Santhosh</string>
+    <string name="author_two">Jothi Praveen</string>
+    <string name="author_three">Hari</string>
+    <string name="year">2024</string>
+
+</resources>
