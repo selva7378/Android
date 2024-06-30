@@ -7,10 +7,22 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.DockedSearchBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,17 +45,33 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Row(modifier = modifier.padding(top = 30.dp)) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier.weight(1f)
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier.weight(1f)
-        )
+    var initialValue by rememberSaveable {
+        mutableStateOf("")
+    }
+    var isSearActive by rememberSaveable {
+        mutableStateOf(false)
+    }
+    val carlist = listOf("selva", "ganesh")
+    Column {
+        DockedSearchBar(
+            modifier = modifier.height(64.dp),
+            query = initialValue,
+            onQueryChange = {
+                initialValue = it
+            },
+            onSearch = {
+
+            },
+            active = isSearActive,
+            onActiveChange = {
+                isSearActive = it
+            }) {
+
+        }
+        Text(text = "selva ganesh")
     }
 
 }
