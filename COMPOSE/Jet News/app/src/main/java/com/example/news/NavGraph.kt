@@ -17,6 +17,8 @@ import com.example.news.screens.WebViewScreen
 import com.example.news.ui.theme.NewsTheme
 import com.example.news.viewmodel.NewsViewModel
 
+val ROUTE_USER_DETAILS = "user_details?Data={user}"
+
 @Composable
 fun NewsApp(
     newsViewModel: NewsViewModel = viewModel(factory = AppViewModelProvider.Factory),
