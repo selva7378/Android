@@ -1,7 +1,5 @@
 package com.example.connectbuddy.screen
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,9 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -35,36 +31,29 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.connectbuddy.R
+import com.example.connectbuddy.viewmodel.ContactViewModel
 
 @Composable
 fun ContactDetailScreen(
-    id: String,
-    name: String,
-    gender: String,
-    email: String,
-    phone: String,
-    cell: String,
-    imageUrl: String,
+    contactViewModel: ContactViewModel,
     modifier: Modifier = Modifier
 ) {
-    val scrollState = rememberScrollState()
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .verticalScroll(rememberScrollState())
         ){
             HeaderSection(
-                image = imageUrl,
-                name = id,
-                role = name,
+                image = contactViewModel.contactDetail.picture?.large ?: "",
+                name = (contactViewModel.contactDetail.name?.first + " " + contactViewModel.contactDetail.name?.last ),
                 modifier = Modifier.weight(1f)
             )
             ContactInfoSection(
-                phNumber = phone,
-                gmail = email,
-                gender = gender,
+                phNumber = contactViewModel.contactDetail.phone ?: "",
+                gmail = contactViewModel.contactDetail.email ?: "",
+                gender = contactViewModel.contactDetail.gender ?: "",
             )
         }
 
@@ -73,7 +62,7 @@ fun ContactDetailScreen(
 
 
 @Composable
-fun HeaderSection(image: String, name: String, role: String, modifier: Modifier = Modifier) {
+fun HeaderSection(image: String, name: String, modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -107,18 +96,18 @@ fun HeaderSection(image: String, name: String, role: String, modifier: Modifier 
             ),
             modifier = Modifier.padding(12.dp)
         )
-        Text(
-            text = role,
-            style = TextStyle(
-                shadow = Shadow(
-                    color = Color.Gray,
-                    offset = Offset(5f, 5f),
-                    blurRadius = 5f
-                ),
-            ),
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-        )
+//        Text(
+//            text = role,
+//            style = TextStyle(
+//                shadow = Shadow(
+//                    color = Color.Gray,
+//                    offset = Offset(5f, 5f),
+//                    blurRadius = 5f
+//                ),
+//            ),
+//            fontWeight = FontWeight.Bold,
+//            modifier = Modifier
+//        )
     }
 }
 

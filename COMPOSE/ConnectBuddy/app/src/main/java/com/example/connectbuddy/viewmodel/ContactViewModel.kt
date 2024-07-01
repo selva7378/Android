@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.connectbuddy.network.dataclass.Contact
 import com.example.connectbuddy.repository.ContactApiRepository
+import com.example.example.Results
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -32,6 +33,8 @@ class ContactViewModel(
     private var _contactData: MutableStateFlow<Contact> = MutableStateFlow(Contact())
     val contactData: StateFlow<Contact> = _contactData
 
+    var contactDetail: Results = Results()
+
     init {
         getNewsFromApi()
         Log.i(TAG, "result list size ${_contactData.value.results.size}")
@@ -41,6 +44,7 @@ class ContactViewModel(
         Log.i("ViewModel", "getfromApi executed")
         viewModelScope.launch {
             try {
+                contactUiState = ContactUiState.Loading
                 val fetchedData = contactApiRepository.getContacts()
                 _contactData.value = fetchedData
                 contactUiState = ContactUiState.Success

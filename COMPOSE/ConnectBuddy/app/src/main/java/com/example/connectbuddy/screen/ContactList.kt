@@ -40,10 +40,9 @@ import com.example.connectbuddy.ContactBuddy
 import com.example.connectbuddy.ContactScreen
 import com.example.connectbuddy.R
 import com.example.connectbuddy.ui.theme.ConnectBuddyTheme
+import com.example.connectbuddy.viewmodel.ContactUiState
 import com.example.connectbuddy.viewmodel.ContactViewModel
 import com.example.example.Results
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 @Composable
 fun ContactHomeScreen(
@@ -52,14 +51,22 @@ fun ContactHomeScreen(
     contactViewModel: ContactViewModel,
 ) {
     val contact = contactViewModel.contactData.collectAsState()
-    ContactList(contact.value.results, navController, modifier)
+    val onClick: (Results) -> Unit = { result ->
+        contactViewModel.contactDetail = result
+        navController.navigate(ContactScreen.BUDDY_DETAILS.name)
+    }
+    when (contactViewModel.contactUiState) {
+        is ContactUiState.Loading -> LoadingScreen(Modifier.fillMaxSize())
+        is ContactUiState.Error -> ErrorScreen(retryAction = { contactViewModel.getNewsFromApi() }, Modifier.fillMaxSize())
+        is ContactUiState.Success -> ContactList(onClick, contact.value.results, modifier)
+    }
 }
 
 
 @Composable
 fun ContactList(
+    onClick: (Results) -> Unit,
     contactResultList: List<Results>,
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -68,24 +75,15 @@ fun ContactList(
         contentPadding = PaddingValues(8.dp)
     ) {
         items(contactResultList) { perContact ->
-            ContactCard(userContact = perContact, navController)
+            ContactCard(onClick, userContact = perContact)
         }
     }
 }
 
 @Composable
-fun dummyCard(userContact: Results) {
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(text = "${userContact.name?.first}")
-    }
-}
-
-@Composable
 fun ContactCard(
+    onClick: (Results) -> Unit,
     userContact: Results,
-    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -109,13 +107,7 @@ fun ContactCard(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 ContactDetailsButton(onClick = {
-                    val imageUrl =
-                        URLEncoder.encode(
-                            userContact.picture?.large,
-                            StandardCharsets.UTF_8.toString()
-                        )
-                    navController
-                        .navigate("${ContactScreen.BUDDY_DETAILS.name}/${userContact.id?.name}/${userContact.name?.first}/${userContact.gender}/${userContact.email}/${userContact.phone}/${userContact.cell}/${imageUrl}")
+                    onClick(userContact)
                 })
             }
         }
@@ -180,7 +172,6 @@ fun ContactDetailsButton(
         )
     }
 }
-
 
 
 @Composable

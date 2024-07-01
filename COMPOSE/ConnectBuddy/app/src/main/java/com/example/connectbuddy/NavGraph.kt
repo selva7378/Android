@@ -42,7 +42,7 @@ fun ContactBuddy(
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = ContactScreen.valueOf(
-        backStackEntry?.destination?.route?.substringBefore("/") ?: ContactScreen.CONTACT_BUDDY.name
+        backStackEntry?.destination?.route ?: ContactScreen.CONTACT_BUDDY.name
     )
 
     Scaffold(
@@ -71,32 +71,11 @@ fun ContactBuddy(
             }
 
             composable(
-                route = "${ContactScreen.BUDDY_DETAILS.name}/{id}/{name}/{gender}/{email}/{phone}/{cell}/{imageUrl}",
-                arguments = listOf(
-                    navArgument(name = "id") { type = NavType.StringType },
-                    navArgument(name = "name") { type = NavType.StringType },
-                    navArgument(name = "gender") { type = NavType.StringType },
-                    navArgument(name = "email") { type = NavType.StringType },
-                    navArgument(name = "phone") { type = NavType.StringType },
-                    navArgument(name = "cell") { type = NavType.StringType },
-                    navArgument(name = "imageUrl") { type = NavType.StringType },
+                route = ContactScreen.BUDDY_DETAILS.name
                 )
-            ) { backStackEntry ->
-                val id = backStackEntry.arguments?.getString("id") ?: ""
-                val name = backStackEntry.arguments?.getString("name") ?: ""
-                val gender = backStackEntry.arguments?.getString("gender") ?: ""
-                val email = backStackEntry.arguments?.getString("email") ?: ""
-                val phone = backStackEntry.arguments?.getString("phone") ?: ""
-                val cell = backStackEntry.arguments?.getString("cell") ?: ""
-                val imageUrl = backStackEntry.arguments?.getString("imageUrl") ?: ""
+             {
                 ContactDetailScreen(
-                    id = id,
-                    name = name,
-                    gender = gender,
-                    email = email,
-                    phone = phone,
-                    cell = cell,
-                    imageUrl = imageUrl
+                    contactViewModel
                 )
             }
         }

@@ -7,8 +7,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Contact (
-
     @SerialName("results" ) var results : ArrayList<Results> = arrayListOf(),
-    @SerialName("info"    ) var info    : Info?              = Info()
-
+    @SerialName("info"    ) var info    : Info?     = Info()
 )
