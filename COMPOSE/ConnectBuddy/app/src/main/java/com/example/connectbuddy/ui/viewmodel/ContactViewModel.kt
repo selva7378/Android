@@ -33,11 +33,19 @@ class ContactViewModel(
     private var _contactData: MutableStateFlow<Contact> = MutableStateFlow(Contact())
     val contactData: StateFlow<Contact> = _contactData
 
-    var contactDetail: Results = Results()
+    private var _selectedContact = MutableStateFlow<Results?>(null)
+    val selectedContact: StateFlow<Results?> = _selectedContact
 
     init {
         getNewsFromApi()
         Log.i(TAG, "result list size ${_contactData.value.results.size}")
+    }
+
+    val onContactSelected : (Results) -> Unit  = {
+        _selectedContact.value = it
+    }
+    val onItemBackPressed: () -> Unit = {
+        _selectedContact.value = null
     }
 
     fun getNewsFromApi() {

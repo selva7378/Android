@@ -2,6 +2,7 @@ package com.example.connectbuddy.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -21,6 +23,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -44,72 +48,83 @@ import com.example.connectbuddy.viewmodel.ContactUiState
 import com.example.connectbuddy.viewmodel.ContactViewModel
 import com.example.example.Results
 
+
 @Composable
 fun ContactHomeScreen(
+    windowSize: WindowSizeClass,
     modifier: Modifier = Modifier,
     navController: NavHostController,
     contactViewModel: ContactViewModel,
 ) {
-    val contact = contactViewModel.contactData.collectAsState()
-    val onClick: (Results) -> Unit = { result ->
-        contactViewModel.contactDetail = result
-        navController.navigate(ContactScreen.BUDDY_DETAILS.name)
+
+    var isExpandedWindowSize = when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            false
+        }
+
+        else -> true
     }
+
     when (contactViewModel.contactUiState) {
         is ContactUiState.Loading -> LoadingScreen(Modifier.fillMaxSize())
-        is ContactUiState.Error -> ErrorScreen(retryAction = { contactViewModel.getNewsFromApi() }, Modifier.fillMaxSize())
-        is ContactUiState.Success -> ContactList(onClick, contact.value.results, modifier)
+        is ContactUiState.Error -> ErrorScreen(
+            retryAction = { contactViewModel.getNewsFromApi() },
+            Modifier.fillMaxSize()
+        )
+
+        is ContactUiState.Success -> ListDetailRoute(
+            isExpandedWindowSize = isExpandedWindowSize,
+            contactViewModel = contactViewModel,
+            modifier
+        )
     }
 }
 
 
 @Composable
 fun ContactList(
-    onClick: (Results) -> Unit,
+    onContactSelected: (Results) -> Unit,
     contactResultList: List<Results>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize(),
-        contentPadding = PaddingValues(8.dp)
-    ) {
-        items(contactResultList) { perContact ->
-            ContactCard(onClick, userContact = perContact)
+    Box(modifier = modifier){
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+            items(items = contactResultList) { perContact ->
+                ContactCard(onContactSelected, userContact = perContact, Modifier)
+            }
         }
     }
 }
 
 @Composable
 fun ContactCard(
-    onClick: (Results) -> Unit,
+    onContactClicked: (Results) -> Unit,
     userContact: Results,
     modifier: Modifier = Modifier
 ) {
+
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 4.dp)
+            .padding(bottom = 4.dp),
+        onClick = { onContactClicked(userContact) }
     ) {
-        Column(
+
+        Row(
             modifier = Modifier
+                .padding(dimensionResource(R.dimen.padding_small)),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(R.dimen.padding_small)),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                UserIcon(userContact.picture?.large!!)
-                UserInformation(
-                    userContact.name?.first + " " + userContact.name?.last,
-                    userContact.phone!!,
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                ContactDetailsButton(onClick = {
-                    onClick(userContact)
-                })
-            }
+            UserIcon(userContact.picture?.large!!)
+            UserInformation(
+                userContact.name?.first + " " + userContact.name?.last,
+                userContact.phone!!,
+            )
         }
 
     }
@@ -143,7 +158,7 @@ fun UserInformation(
     userNumber: String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = Modifier.padding(start = 40.dp)) {
         Text(
             text = "$userName",
             style = MaterialTheme.typography.displayMedium,
@@ -205,7 +220,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     ConnectBuddyTheme {
-        ContactBuddy()
+//        ContactBuddy()
     }
 }
 

@@ -12,10 +12,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -34,8 +38,10 @@ enum class ContactScreen {
     BUDDY_DETAILS
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactBuddy(
+    windowSize: WindowSizeClass,
     contactViewModel: ContactViewModel = viewModel(factory = AndroidViewModelProvider.Factory),
     navController: NavHostController = rememberNavController(),
     modifier: Modifier = Modifier
@@ -45,9 +51,12 @@ fun ContactBuddy(
         backStackEntry?.destination?.route ?: ContactScreen.CONTACT_BUDDY.name
     )
 
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             ContactAppBar(
+                scrollBehavior = scrollBehavior,
                 currentScreen = currentScreen,
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.navigateUp() }
@@ -64,18 +73,10 @@ fun ContactBuddy(
                 route = ContactScreen.CONTACT_BUDDY.name
             ) {
                 ContactHomeScreen(
+                    windowSize,
                     navController = navController,
                     contactViewModel = contactViewModel,
                     modifier = modifier.padding(innerPadding)
-                )
-            }
-
-            composable(
-                route = ContactScreen.BUDDY_DETAILS.name
-                )
-             {
-                ContactDetailScreen(
-                    contactViewModel
                 )
             }
         }
@@ -87,12 +88,14 @@ fun ContactBuddy(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactAppBar(
+    scrollBehavior: TopAppBarScrollBehavior,
     currentScreen: ContactScreen,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     CenterAlignedTopAppBar(
+        scrollBehavior = scrollBehavior,
         title = { Text(text = currentScreen.name) },
         modifier = modifier,
         navigationIcon = {

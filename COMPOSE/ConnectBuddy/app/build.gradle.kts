@@ -91,4 +91,6 @@ dependencies {
 
     //gson
     implementation ("com.google.code.gson:gson:2.8.9")
+
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0")
 }

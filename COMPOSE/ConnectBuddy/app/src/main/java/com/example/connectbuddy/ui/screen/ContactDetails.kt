@@ -1,6 +1,7 @@
 package com.example.connectbuddy.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +30,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.connectbuddy.R
@@ -38,27 +41,29 @@ fun ContactDetailScreen(
     contactViewModel: ContactViewModel,
     modifier: Modifier = Modifier
 ) {
+    val selectedContact = contactViewModel.selectedContact.collectAsState()
+
+    Box(modifier = modifier){
         Column(
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-        ){
+        ) {
             HeaderSection(
-                image = contactViewModel.contactDetail.picture?.large ?: "",
-                name = (contactViewModel.contactDetail.name?.first + " " + contactViewModel.contactDetail.name?.last ),
-                modifier = Modifier.weight(1f)
+                image = selectedContact.value?.picture?.large ?: "",
+                name = (selectedContact.value?.name?.first + " " + selectedContact.value?.name?.last),
+//                modifier = Modifier.weight(1f)
             )
             ContactInfoSection(
-                phNumber = contactViewModel.contactDetail.phone ?: "",
-                gmail = contactViewModel.contactDetail.email ?: "",
-                gender = contactViewModel.contactDetail.gender ?: "",
+                phNumber = selectedContact.value?.phone ?: "",
+                gmail = selectedContact.value?.email ?: "",
+                gender = selectedContact.value?.gender ?: "",
             )
         }
-
+    }
 }
-
 
 
 @Composable
@@ -92,34 +97,28 @@ fun HeaderSection(image: String, name: String, modifier: Modifier = Modifier) {
             fontWeight = FontWeight.ExtraBold,
             style = TextStyle(
                 fontStyle = FontStyle.Italic,
-                fontFamily = FontFamily.Cursive
+                fontFamily = FontFamily.Cursive,
+                fontSize = 32.sp
             ),
             modifier = Modifier.padding(12.dp)
         )
-//        Text(
-//            text = role,
-//            style = TextStyle(
-//                shadow = Shadow(
-//                    color = Color.Gray,
-//                    offset = Offset(5f, 5f),
-//                    blurRadius = 5f
-//                ),
-//            ),
-//            fontWeight = FontWeight.Bold,
-//            modifier = Modifier
-//        )
     }
 }
 
 @Composable
-fun ContactInfoSection(phNumber: String, gmail: String, gender: String, modifier: Modifier = Modifier) {
-    Column (
+fun ContactInfoSection(
+    phNumber: String,
+    gmail: String,
+    gender: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
         modifier = Modifier.padding(bottom = 20.dp)
-    ){
-        Row (
+    ) {
+        Row(
             modifier = modifier
                 .padding(8.dp)
-        ){
+        ) {
             Icon(
                 imageVector = Icons.Rounded.Call,
                 tint = Color(0xFF3ddc84),
@@ -132,13 +131,14 @@ fun ContactInfoSection(phNumber: String, gmail: String, gender: String, modifier
                 )
             )
         }
-        Row (
+        Row(
             modifier = modifier.padding(8.dp)
-        ){
+        ) {
             Icon(
                 imageVector = Icons.Rounded.Email,
                 tint = Color(0xFF3ddc84),
-                contentDescription = "gmail")
+                contentDescription = "gmail"
+            )
             Text(
                 text = gmail,
                 modifier = Modifier.padding(
@@ -149,10 +149,12 @@ fun ContactInfoSection(phNumber: String, gmail: String, gender: String, modifier
         Row(
             modifier = modifier.padding(8.dp)
         ) {
-            Icon(painter = painterResource(id = R.drawable.male_and_female),
+            Icon(
+                painter = painterResource(id = R.drawable.male_and_female),
                 tint = Color(0xFF3ddc84),
                 contentDescription = "Gender",
-                modifier = Modifier.size(30.dp))
+                modifier = Modifier.size(30.dp)
+            )
             Text(
                 text = gender,
                 modifier = Modifier.padding(
@@ -162,29 +164,5 @@ fun ContactInfoSection(phNumber: String, gmail: String, gender: String, modifier
         }
     }
 }
-
-
-//@Composable
-//fun detailsCard(label: String, value: String){
-//    ElevatedCard(
-//        modifier = Modifier.fillMaxWidth()
-//    ) {
-//        Row(
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.SpaceBetween,
-//        ) {
-//            Text(text = label,
-//                style = MaterialTheme.typography.headlineLarge,
-//               )
-//            Text(text = ":",
-//                style = MaterialTheme.typography.displaySmall,
-//                modifier = Modifier
-//               )
-//            Text(text = value,
-//                style = MaterialTheme.typography.headlineSmall,
-//                )
-//        }
-//    }
-//}
 
 

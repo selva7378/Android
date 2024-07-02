@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.DockedSearchBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -48,32 +51,14 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var initialValue by rememberSaveable {
-        mutableStateOf("")
-    }
-    var isSearActive by rememberSaveable {
-        mutableStateOf(false)
-    }
-    val carlist = listOf("selva", "ganesh")
-    Column {
-        DockedSearchBar(
-            modifier = modifier.height(64.dp),
-            query = initialValue,
-            onQueryChange = {
-                initialValue = it
-            },
-            onSearch = {
-
-            },
-            active = isSearActive,
-            onActiveChange = {
-                isSearActive = it
-            }) {
-
+    val list = listOf(1, 2, 3, 4, 5)
+    LazyColumn {
+        items(list) { index ->
+            Card() {
+                Text(text = index.toString())
+            }
         }
-        Text(text = "selva ganesh")
     }
-
 }
 
 @Preview(showBackground = true)

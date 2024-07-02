@@ -140,7 +140,7 @@ fun DogItem(
                         stiffness = Spring.StiffnessLow,
                     )
                 )
-x                .background(color = color)
+                .background(color = color)
         ) {
             Row(
                 modifier = Modifier
