@@ -1,5 +1,4 @@
-package com.example.news.ui.theme
-
+package com.example.connectbuddy.nr.theme
 
 
 

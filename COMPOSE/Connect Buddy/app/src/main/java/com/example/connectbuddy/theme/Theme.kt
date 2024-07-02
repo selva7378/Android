@@ -1,5 +1,4 @@
-package com.example.news.ui.theme
-
+package com.example.connectbuddy.nr.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -254,10 +253,10 @@ val unspecified_scheme = ColorFamily(
 )
 
 @Composable
-fun NewsTheme(
+fun ContactBuddyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
