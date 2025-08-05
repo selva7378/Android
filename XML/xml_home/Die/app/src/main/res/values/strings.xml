@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Die</string>
+    <string name="roll">ROLL</string>
+    <string name="die_image">die image</string>
+</resources>

@@ -36,7 +36,7 @@ import com.example.inventory.ui.item.ItemEntryScreen
  * Provides Navigation graph for the application.
  */
 @Composable
-fun InventoryNavHost(
+fun  InventoryNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
@@ -60,7 +60,7 @@ fun InventoryNavHost(
             )
         }
         composable(
-            route = ItemDetailsDestination.routeWithArgs,  // "$route/{$itemIdArg}"
+            route = ItemDetailsDestination.routeWithArgs,
             arguments = listOf(navArgument(ItemDetailsDestination.itemIdArg) {
                 type = NavType.IntType
             })

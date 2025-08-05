@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/news_fragment"
+        android:title="news" />
+
+    <item
+        android:id="@+id/weather_fragment"
+        android:title="weather" />
+</menu>

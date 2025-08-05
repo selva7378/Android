@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Compose Article</string>
+    <string name="app_name">Article</string>
     <string name="title">Jetpack Compose tutorial</string>
     <string name="short_description">Jetpack Compose is a modern toolkit for
         building native Android UI. Compose simplifies and accelerates
