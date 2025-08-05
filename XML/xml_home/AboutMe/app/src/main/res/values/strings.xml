@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+
+    <string name="name">selva ganesh</string>
+    <string name="yellow_star">Yellow Star</string>
+
+    <string name="bio">
+        "Hey there! I’m Selva — a curious mind with a love for technology,
+        creativity, and all things innovative. Whether I'm building something cool,
+        exploring new ideas, or just vibing with music and good conversations,
+        I’m always looking for ways to grow and make a positive impact. Friendly,
+        focused, and just a little bit obsessed with details. Let’s create something awesome together!
+        \n\n1. Professional / Developer Style
+💻 Selva is a passionate Android developer who loves turning ideas into clean, functional apps. With a knack for Jetpack Compose, intuitive UI, and scalable architecture, Selva constantly strives to build tech that makes life easier. Always learning, always building.
+
+2. Creative / Casual
+🎨 I'm Selva — part thinker, part doer, full-time dreamer. I live for moments of inspiration, deep conversations, and building things that feel alive. Whether it’s an app, a sketch, or a story, I love creating with purpose and style.
+
+3. Minimal &amp; Clean
+Hi, I’m Selva. I make things — mostly digital, sometimes analog. Passionate about tech, driven by curiosity, grounded in purpose.
+
+4. Fun &amp; Quirky
+Hey! I'm Selva — coffee-fueled coder by day, meme curator by night. I break things so I can learn how to fix them. Powered by bugs, features, and the occasional YouTube tutorial spiral.
+
+5. Confident &amp; Ambitious
+I’m Selva, and I build what I believe in. Driven by innovation, backed by skills, and focused on impact — I’m not just here to code. I’m here to create value.
+
+"
+    </string>
+    <string name="what_is_your_nickname">What is your nick name ?</string>
+</resources>
